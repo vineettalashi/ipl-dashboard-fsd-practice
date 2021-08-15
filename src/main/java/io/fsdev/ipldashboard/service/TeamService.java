@@ -1,15 +1,17 @@
 package io.fsdev.ipldashboard.service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import io.fsdev.ipldashboard.Repository.MatchRepository;
 import io.fsdev.ipldashboard.Repository.TeamRepository;
+import io.fsdev.ipldashboard.batch.Match;
 import io.fsdev.ipldashboard.data.Team;
 
 @Service
@@ -38,4 +40,11 @@ public class TeamService {
         return Optional.of(team);
     }
     
+    public List<Match> getAllMatchesPlayedByTeamYearwise(String teamName,int year){
+        LocalDate startDate = LocalDate.of(year, 1, 1);
+        LocalDate endDate = LocalDate.of(year+1, 1, 1);
+        List<Match> listOfMatches = this.matchRepository.getMatchesByTeamNameAndDateBetween(teamName,startDate,endDate);
+        return listOfMatches;
+        
+    }
 }
