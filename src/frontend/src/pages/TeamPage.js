@@ -3,6 +3,7 @@ import { MatchDetailCard } from '../components/MatchDetailCard';
 import { MatchSmallCard } from '../components/MatchSmallCard';
 import { useParams } from 'react-router-dom';
 import { PieChart } from 'react-minimal-pie-chart';
+import { Link } from 'react-router-dom';
 import '../scss/TeamPage.scss'
 
 export const TeamPage = () => {
@@ -14,14 +15,14 @@ export const TeamPage = () => {
 
     useEffect( 
       () => {
-        const fetchMatches = async() => {
+        const fetchTeam = async() => {
         const response = await fetch(`http://localhost:8081/teams/${teamName}`)
         const data = await response.json();
         setStatus(response.status);
         setStatusText(response.statusText)
         setTeam(data);
         }
-        fetchMatches();
+        fetchTeam();
       },[teamName]
     );
 
@@ -44,12 +45,12 @@ export const TeamPage = () => {
 
           <PieChart
           data={[
-            { title: 'Losses', value: team.totalMatchesPlayed-team.totalWins, color: '#a34d5d' },
+            { title: 'Losses', value: team.totalMatchesPlayed-team.totalWins, color: '#a34d5d'},
             { title: 'Wins', value: team.totalWins, color: '#4da375' }
             
           ]}
         />
-        
+
         </div>
 
 
@@ -58,10 +59,10 @@ export const TeamPage = () => {
            <MatchDetailCard teamName = {team.teamName} match = {team.matchesPlayed[0]} />
         </div>
         
-        {team.matchesPlayed.slice(1).map(match => <MatchSmallCard teamName = {team.teamName} match={match}/>)}
+        {team.matchesPlayed.slice(1).map(match => <MatchSmallCard key={match.id} teamName = {team.teamName} match={match}/>)}
                 
         <div className="more-links-section">
-          <a href="#">More &gt;</a>
+        <Link to={`/teams/${teamName}/matches/${process.env.REACT_APP_IPL_END_YEAR}`}>More &gt;</Link>
         </div>
       
       </div>  

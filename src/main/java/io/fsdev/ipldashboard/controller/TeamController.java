@@ -1,5 +1,6 @@
 package io.fsdev.ipldashboard.controller;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,11 @@ public class TeamController {
     @Autowired
     public TeamController(TeamService teamService){
         this.teamService=teamService;
+    }
+
+    @GetMapping("/teams/")
+    public Iterable<Team> getAllTeams(){
+        return teamService.getAllTeamsThatHavePlayedIPL();
     }
     
 

@@ -14,8 +14,8 @@ export const MatchDetailCard = ({teamName , match}) => {
         <span className="vs"> vs </span>
         <Link to={otherTeamRoute}>{otherteam} </Link>
         </h1>
-        <h2 className="match-date">{match.date}</h2>
-        <h3 className="match-name">{match.venue}</h3>
+        <h3 className="match-date">Match Date: {match.date}</h3>
+        <h3 className="match-name">Played At: {match.venue}</h3>
         <h3 className="match-winner">{match.winner} won by {match.resultMargin} {match.result}</h3>
     </div>
     <div className="additional-match-info">

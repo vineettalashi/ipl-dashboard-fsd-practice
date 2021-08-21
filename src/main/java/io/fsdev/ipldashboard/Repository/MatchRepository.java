@@ -1,6 +1,7 @@
 package io.fsdev.ipldashboard.Repository;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import io.fsdev.ipldashboard.batch.Match;
+import io.fsdev.ipldashboard.data.Team;
 
 public interface MatchRepository extends CrudRepository<Match,Long> {
     
@@ -31,5 +33,8 @@ public interface MatchRepository extends CrudRepository<Match,Long> {
         return this.getMatchesByTeam1OrTeam2OrderByDateDesc(teamName, teamName, pageable);
 
     }
+
+    @Query(nativeQuery = true,value = "Select (m.team1) from Match m UNION Select (m.team2) from Match m")
+    public Set<String> findDistinctTeam1();
 
 }

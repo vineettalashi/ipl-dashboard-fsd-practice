@@ -3,6 +3,7 @@ package io.fsdev.ipldashboard.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,10 @@ public class TeamService {
     public TeamService(TeamRepository teamRepository, MatchRepository matchRepository) {
         this.teamRepository = teamRepository;
         this.matchRepository = matchRepository;
+    }
+
+    public Iterable<Team> getAllTeamsThatHavePlayedIPL(){
+        return  this.teamRepository.findAll();
     }
 
 

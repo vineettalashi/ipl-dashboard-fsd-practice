@@ -8,5 +8,5 @@ import io.fsdev.ipldashboard.data.Team;
 
 public interface TeamRepository extends CrudRepository<Team,Long>{
 
-    public Optional<Team> getAllDetailsByTeamName(String teamName);    
+    public Optional<Team> getAllDetailsByTeamName(String teamName);
 }
